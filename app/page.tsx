@@ -25,21 +25,20 @@ export default function Home() {
 
       <header className="mx-auto max-w-3xl px-6 pb-16 pt-20 md:pt-28">
         <h1
-          className="max-w-[20ch] text-[clamp(2.25rem,5vw,3.5rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-neutral-100"
+          className="text-[clamp(2.5rem,5.5vw,4rem)] font-semibold leading-[1.05] tracking-[-0.025em] text-neutral-100"
           style={{ fontFamily: "var(--font-newsreader), ui-serif, Georgia, serif" }}
         >
-          Your Cursor has 8 MCP servers and 200+ tool definitions. The model sees all of them, every turn.
+          One MCP server instead of eight.
         </h1>
-        <p className="mt-6 max-w-lg text-[16px] leading-relaxed text-neutral-400">
-          Rostr is a local proxy that sits in front of the rest. Four tools, one
-          playbook file, zero cloud dependencies. The context window gets its headroom back.
+        <p className="mt-5 max-w-md text-[17px] leading-relaxed text-neutral-400">
+          200 tool definitions in every context window. Rostr replaces them with four
+          and a playbook that learns from your runs.
         </p>
 
         <div className="mt-10">
           <CodeBlock lines={["npm install -g rostr-mcp", "rostr init"]} />
           <p className="mt-3 font-mono text-[12px] text-neutral-600">
-            Add <span className="text-neutral-400">rostr-mcp</span> to{" "}
-            <span className="text-neutral-400">.cursor/mcp.json</span>, reload. That&apos;s it.
+            Add to <span className="text-neutral-400">.cursor/mcp.json</span>, reload.
           </p>
         </div>
       </header>
