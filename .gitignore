@@ -32,6 +32,14 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+
+# mcp-server build
+mcp-server/dist/
+mcp-server/node_modules/
+
+# rostr auto-generated
+.cursor/rules/rostr.mdc
 
 # vercel
 .vercel

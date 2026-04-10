@@ -1,0 +1,43 @@
+{
+  "name": "rostr",
+  "version": "0.2.0",
+  "description": "Intelligent MCP proxy for Cursor — cut context window bloat by 90%, learn patterns from every run",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "rostr": "dist/cli.js",
+    "rostr-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts src/cli.ts --format esm --clean --external better-sqlite3",
+    "dev": "tsup src/index.ts src/cli.ts --format esm --watch --external better-sqlite3",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "better-sqlite3": "^11.0.0",
+    "commander": "^14.0.3",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/uuid": "^10.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "files": ["dist", "README.md", "LICENSE"],
+  "keywords": [
+    "mcp",
+    "cursor",
+    "orchestration",
+    "context-window",
+    "developer-tools",
+    "ai",
+    "agent"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicholasbateman/rostr"
+  }
+}

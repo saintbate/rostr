@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rostr
 
-## Getting Started
+Intelligent MCP proxy for Cursor. One server instead of eight — 90% less context window bloat.
 
-First, run the development server:
+## What is this?
+
+Rostr sits between Cursor's AI and your MCP servers. Instead of 8 servers injecting ~200 tool definitions into every context window, Rostr exposes 4 tools and a lightweight playbook file. It auto-discovers your connected servers, learns patterns from every workflow run, and provides sequencing advice — all locally, no cloud, no API keys.
+
+## Quick Start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install -g rostr
+rostr init
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Add to `.cursor/mcp.json`:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```json
+{
+  "mcpServers": {
+    "rostr": {
+      "command": "npx",
+      "args": ["-y", "rostr-mcp"]
+    }
+  }
+}
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Restart Cursor. Done.
 
-## Learn More
+## MCP Tools
 
-To learn more about Next.js, take a look at the following resources:
+| Tool | When Cursor uses it |
+|------|-------------------|
+| `list_roster` | Start of any infra task — see connected servers and saved workflows |
+| `suggest_plan` | Before multi-step work — get the optimal sequence with failure warnings |
+| `log_run` | After completing a task — log the outcome so Rostr learns |
+| `recall_playbook` | Before unfamiliar stack combos — get known patterns and success rates |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## CLI
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+rostr status                        # Servers, stats, pattern count
+rostr workflow list                  # Saved workflows
+rostr workflow add --name "deploy"   # Add a workflow
+rostr logs                           # Recent runs
+rostr patterns                       # Learned patterns
+rostr reset --yes                    # Clear all data
+```
 
-## Deploy on Vercel
+## How It Works
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Discover** — reads `.cursor/mcp.json` + plugin directories to find all your servers
+2. **Advise** — `suggest_plan` returns optimal step sequences with warnings from past failures
+3. **Learn** — `log_run` records outcomes, extracts patterns (failure rates, ordering dependencies, timing)
+4. **Inject** — writes `.cursor/rules/rostr.mdc` with `alwaysApply: true` so Cursor reads patterns on every turn
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All data stored locally in `~/.rostr/rostr.db` (SQLite).
+
+## Repository Structure
+
+```
+rostr/
+├── app/                   # Landing page (Next.js)
+├── mcp-server/            # The npm package
+│   └── src/
+│       ├── index.ts       # MCP server entry (stdio)
+│       ├── cli.ts         # CLI entry (rostr command)
+│       ├── tools/         # list_roster, suggest_plan, log_run, recall_playbook
+│       └── lib/           # db, config, playbook, mdc-writer
+└── .cursor/
+    └── rules/rostr.mdc    # Auto-generated playbook
+```
+
+## License
+
+MIT

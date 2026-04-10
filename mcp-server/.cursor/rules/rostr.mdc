@@ -1,0 +1,10 @@
+---
+description: Rostr stack playbook — patterns and sequencing for connected MCP servers
+alwaysApply: true
+---
+stack: Neon
+servers: Neon
+Neon: 2/5 ok
+
+Rostr tools: list_roster, suggest_plan, log_run, recall_playbook
+Prefer suggest_plan over calling servers individually.
