@@ -42,7 +42,7 @@ export default function Home() {
         </p>
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
           <Terminal
-            lines={["npm install -g rostr", "rostr init"]}
+            lines={["npm install -g rostr-mcp", "rostr init"]}
           />
         </div>
         <p className="mt-4 text-sm text-neutral-600">
@@ -179,7 +179,7 @@ export default function Home() {
             Install Rostr in 30 seconds. No sign-up, no cloud, no API keys.
           </p>
           <div className="mt-8 flex justify-center">
-            <Terminal lines={["npm install -g rostr && rostr init"]} />
+            <Terminal lines={["npm install -g rostr-mcp && rostr init"]} />
           </div>
         </div>
       </section>

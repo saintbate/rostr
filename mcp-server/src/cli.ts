@@ -56,7 +56,7 @@ program
     "mcpServers": {
       "rostr": {
         "command": "npx",
-        "args": ["-y", "rostr"]
+        "args": ["-y", "rostr-mcp"]
       }
     }
   }

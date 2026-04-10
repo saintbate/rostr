@@ -1,5 +1,5 @@
 {
-  "name": "rostr",
+  "name": "rostr-mcp",
   "version": "0.2.0",
   "description": "Intelligent MCP proxy for Cursor — cut context window bloat by 90%, learn patterns from every run",
   "type": "module",

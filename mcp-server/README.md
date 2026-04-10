@@ -7,7 +7,7 @@ Rostr sits between Cursor's AI and your MCP servers. It auto-discovers your conn
 ## Install
 
 ```bash
-npm install -g rostr
+npm install -g rostr-mcp
 rostr init
 ```
 

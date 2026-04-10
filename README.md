@@ -9,7 +9,7 @@ Rostr sits between Cursor's AI and your MCP servers. Instead of 8 servers inject
 ## Quick Start
 
 ```bash
-npm install -g rostr
+npm install -g rostr-mcp
 rostr init
 ```
 
