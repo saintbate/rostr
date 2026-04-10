@@ -1,201 +1,195 @@
+const GITHUB = "https://github.com/saintbate/rostr";
+const NPM = "https://www.npmjs.com/package/rostr-mcp";
+
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      {/* Nav */}
-      <nav className="fixed top-0 z-50 w-full border-b border-white/5 bg-[#0a0a0a]/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <span className="font-mono text-lg font-bold tracking-tight">
-            rostr
-          </span>
-          <div className="flex items-center gap-6">
-            <a
-              href="https://github.com/nicholasbateman/rostr"
-              className="text-sm text-neutral-400 transition hover:text-white"
-            >
-              GitHub
+    <main className="relative min-h-screen">
+      <nav className="border-b border-white/[0.06]">
+        <div className="mx-auto flex max-w-3xl items-baseline justify-between gap-8 px-6 py-5">
+          <a href="/" className="font-mono text-[15px] tracking-[0.08em] text-neutral-200">
+            ROSTR
+          </a>
+          <div className="flex gap-8 font-mono text-[13px] text-neutral-500">
+            <a href="#how" className="transition hover:text-neutral-300">
+              how it works
             </a>
-            <a
-              href="https://www.npmjs.com/package/rostr"
-              className="text-sm text-neutral-400 transition hover:text-white"
-            >
+            <a href={GITHUB} className="transition hover:text-neutral-300">
+              github
+            </a>
+            <a href={NPM} className="transition hover:text-neutral-300">
               npm
             </a>
           </div>
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="flex flex-col items-center justify-center px-6 pt-40 pb-24 text-center">
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-neutral-300">
-          <span className="h-2 w-2 rounded-full bg-emerald-400" />
-          v0.2 — now with CLI + pattern learning
-        </div>
-        <h1 className="max-w-3xl text-5xl font-bold leading-[1.1] tracking-tight md:text-6xl">
-          One MCP server
-          <br />
-          <span className="text-neutral-500">instead of eight.</span>
+      <header className="mx-auto max-w-3xl px-6 pb-16 pt-20 md:pt-28">
+        <h1
+          className="max-w-[20ch] text-[clamp(2.25rem,5vw,3.5rem)] font-semibold leading-[1.08] tracking-[-0.02em] text-neutral-100"
+          style={{ fontFamily: "var(--font-newsreader), ui-serif, Georgia, serif" }}
+        >
+          Your Cursor has 8 MCP servers and 200+ tool definitions. The model sees all of them, every turn.
         </h1>
-        <p className="mt-6 max-w-xl text-lg text-neutral-400">
-          Rostr is an intelligent MCP proxy for Cursor. It replaces hundreds of
-          tool definitions with 4, learns from every workflow run, and keeps your
-          context window clean.
+        <p className="mt-6 max-w-lg text-[16px] leading-relaxed text-neutral-400">
+          Rostr is a local proxy that sits in front of the rest. Four tools, one
+          playbook file, zero cloud dependencies. The context window gets its headroom back.
         </p>
-        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
-          <Terminal
-            lines={["npm install -g rostr-mcp", "rostr init"]}
-          />
-        </div>
-        <p className="mt-4 text-sm text-neutral-600">
-          Works with Neon, Stripe, Vercel, GitHub, Supabase, Cloudflare, and any MCP server.
-        </p>
-      </section>
 
-      {/* Before / After */}
-      <section className="border-y border-white/5 bg-white/[0.02] py-24">
-        <div className="mx-auto max-w-5xl px-6">
-          <h2 className="mb-12 text-center text-3xl font-bold tracking-tight">
-            90% less context window bloat
+        <div className="mt-10">
+          <CodeBlock lines={["npm install -g rostr-mcp", "rostr init"]} />
+          <p className="mt-3 font-mono text-[12px] text-neutral-600">
+            Add <span className="text-neutral-400">rostr-mcp</span> to{" "}
+            <span className="text-neutral-400">.cursor/mcp.json</span>, reload. That&apos;s it.
+          </p>
+        </div>
+      </header>
+
+      <section className="border-t border-white/[0.06] py-14 md:py-20">
+        <div className="mx-auto max-w-3xl px-6">
+          <h2 className="text-sm font-medium uppercase tracking-widest text-neutral-500">
+            Before / after
           </h2>
-          <div className="grid gap-6 md:grid-cols-2">
-            <ComparisonCard
-              title="Without Rostr"
-              bad
-              items={[
-                "8 MCP servers connected",
-                "~200 tool definitions injected",
-                "~4,000 tokens consumed per turn",
-                "AI confused by irrelevant tools",
-                "No memory between sessions",
-              ]}
-            />
-            <ComparisonCard
-              title="With Rostr"
-              items={[
-                "1 MCP server (Rostr)",
-                "4 tool definitions total",
-                "~400 tokens consumed per turn",
-                "AI gets only what it needs",
-                "Learns from every run",
-              ]}
-            />
+          <div className="mt-8 grid gap-6 sm:grid-cols-2">
+            <div className="space-y-3 rounded border border-white/[0.06] p-5">
+              <p className="font-mono text-[11px] uppercase tracking-wider text-neutral-600">Without Rostr</p>
+              <dl className="space-y-2 text-sm">
+                <div className="flex justify-between gap-4"><dt className="text-neutral-500">MCP servers loaded</dt><dd className="text-neutral-300">8</dd></div>
+                <div className="flex justify-between gap-4"><dt className="text-neutral-500">Tool schemas in context</dt><dd className="text-neutral-300">~200</dd></div>
+                <div className="flex justify-between gap-4"><dt className="text-neutral-500">Tokens burned on tools</dt><dd className="text-neutral-300">~87k</dd></div>
+                <div className="flex justify-between gap-4"><dt className="text-neutral-500">Memory across sessions</dt><dd className="text-neutral-300">none</dd></div>
+              </dl>
+            </div>
+            <div className="space-y-3 rounded border border-orange-500/20 bg-orange-500/[0.02] p-5">
+              <p className="font-mono text-[11px] uppercase tracking-wider text-orange-400/60">With Rostr</p>
+              <dl className="space-y-2 text-sm">
+                <div className="flex justify-between gap-4"><dt className="text-neutral-500">MCP servers loaded</dt><dd className="text-neutral-200">1</dd></div>
+                <div className="flex justify-between gap-4"><dt className="text-neutral-500">Tool schemas in context</dt><dd className="text-neutral-200">4</dd></div>
+                <div className="flex justify-between gap-4"><dt className="text-neutral-500">Tokens burned on tools</dt><dd className="text-neutral-200">~4k</dd></div>
+                <div className="flex justify-between gap-4"><dt className="text-neutral-500">Memory across sessions</dt><dd className="text-neutral-200">.mdc playbook</dd></div>
+              </dl>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="py-24">
-        <div className="mx-auto max-w-5xl px-6">
-          <h2 className="mb-4 text-center text-3xl font-bold tracking-tight">
+      <section id="how" className="border-t border-white/[0.06] py-14 md:py-20">
+        <div className="mx-auto max-w-3xl px-6">
+          <h2 className="text-sm font-medium uppercase tracking-widest text-neutral-500">
             How it works
           </h2>
-          <p className="mx-auto mb-16 max-w-lg text-center text-neutral-400">
-            Three steps. No cloud. No API keys. Everything runs locally.
-          </p>
-          <div className="grid gap-8 md:grid-cols-3">
-            <Step
-              num="01"
-              title="Discover"
-              desc="Rostr reads your .cursor/mcp.json and Cursor plugins to find every connected server automatically."
-            />
-            <Step
-              num="02"
-              title="Advise"
-              desc="suggest_plan returns the optimal step sequence for any goal, with warnings from past failures."
-            />
-            <Step
-              num="03"
-              title="Learn"
-              desc="log_run records outcomes, extracts patterns, and updates the .mdc playbook Cursor reads on every turn."
-            />
+          <div className="mt-8 space-y-6">
+            <div className="grid gap-2 sm:grid-cols-[8rem_1fr] sm:gap-6">
+              <h3 className="font-mono text-[13px] text-neutral-300">Discover</h3>
+              <p className="text-[15px] leading-relaxed text-neutral-500">
+                Reads your <code className="text-neutral-400">.cursor/mcp.json</code> and plugin directories.
+                Builds a roster of what&apos;s actually connected right now.
+              </p>
+            </div>
+            <div className="grid gap-2 sm:grid-cols-[8rem_1fr] sm:gap-6">
+              <h3 className="font-mono text-[13px] text-neutral-300">Plan</h3>
+              <p className="text-[15px] leading-relaxed text-neutral-500">
+                <code className="text-neutral-400">suggest_plan</code> looks at the goal, your servers, and
+                your run history. Returns a sequence with warnings where things have broken before.
+              </p>
+            </div>
+            <div className="grid gap-2 sm:grid-cols-[8rem_1fr] sm:gap-6">
+              <h3 className="font-mono text-[13px] text-neutral-300">Execute</h3>
+              <p className="text-[15px] leading-relaxed text-neutral-500">
+                The agent still calls Neon, Stripe, GitHub directly. Rostr doesn&apos;t proxy HTTP.
+                It routes attention, not packets.
+              </p>
+            </div>
+            <div className="grid gap-2 sm:grid-cols-[8rem_1fr] sm:gap-6">
+              <h3 className="font-mono text-[13px] text-neutral-300">Learn</h3>
+              <p className="text-[15px] leading-relaxed text-neutral-500">
+                <code className="text-neutral-400">log_run</code> records outcomes. Patterns get extracted.{" "}
+                <code className="text-neutral-400">.cursor/rules/rostr.mdc</code> gets rewritten so the next
+                turn starts with context.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Tools */}
-      <section className="border-y border-white/5 bg-white/[0.02] py-24">
-        <div className="mx-auto max-w-5xl px-6">
-          <h2 className="mb-12 text-center text-3xl font-bold tracking-tight">
-            4 tools. That&apos;s it.
+      <section className="border-t border-white/[0.06] py-14 md:py-20">
+        <div className="mx-auto max-w-3xl px-6">
+          <h2 className="text-sm font-medium uppercase tracking-widest text-neutral-500">
+            Tools
           </h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            <ToolCard
-              name="list_roster"
-              when="Start of any infra task"
-              what="Shows connected servers, saved workflows, and run history"
-            />
-            <ToolCard
-              name="suggest_plan"
-              when="Before multi-step work"
-              what="Returns the optimal step sequence with failure warnings"
-            />
-            <ToolCard
-              name="log_run"
-              when="After completing a task"
-              what="Records the outcome so Rostr learns for next time"
-            />
-            <ToolCard
-              name="recall_playbook"
-              when="Unfamiliar stack combo"
-              what="Returns known patterns and success rates"
-            />
+          <div className="mt-8 overflow-x-auto">
+            <table className="w-full border-collapse text-left font-mono text-[13px]">
+              <thead>
+                <tr className="border-b border-white/[0.1] text-neutral-600">
+                  <th className="pb-3 pr-6 font-normal">name</th>
+                  <th className="pb-3 pr-6 font-normal">when</th>
+                  <th className="pb-3 font-normal">what</th>
+                </tr>
+              </thead>
+              <tbody className="text-neutral-300">
+                {([
+                  ["list_roster", "Start of a task", "Connected servers, saved workflows, recent stacks"],
+                  ["suggest_plan", "Before multi-step work", "Optimal sequence with failure warnings from history"],
+                  ["log_run", "After a run", "Persists outcome, extracts patterns, rewrites .mdc"],
+                  ["recall_playbook", "Unfamiliar stack combo", "Known patterns and success rates for that set of servers"],
+                ] as const).map(([name, when, what]) => (
+                  <tr key={name} className="border-b border-white/[0.06]">
+                    <td className="py-3 pr-6 align-top text-orange-400/80">{name}</td>
+                    <td className="py-3 pr-6 align-top text-neutral-500">{when}</td>
+                    <td className="py-3 align-top text-neutral-400">{what}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
-      {/* Pattern learning */}
-      <section className="py-24">
-        <div className="mx-auto max-w-5xl px-6">
-          <h2 className="mb-4 text-center text-3xl font-bold tracking-tight">
-            Gets smarter every run
-          </h2>
-          <p className="mx-auto mb-12 max-w-lg text-center text-neutral-400">
-            Rostr extracts patterns automatically. No cloud, no AI calls — pure
-            local rule-based learning.
-          </p>
-          <div className="mx-auto max-w-2xl">
-            <Terminal
+      <section className="border-t border-white/[0.06] py-14 md:py-20">
+        <div className="mx-auto max-w-3xl px-6">
+          <div className="grid gap-8 lg:grid-cols-[1fr_auto]">
+            <div>
+              <h2 className="text-sm font-medium uppercase tracking-widest text-neutral-500">
+                Pattern learning
+              </h2>
+              <p className="mt-4 max-w-md text-[15px] leading-relaxed text-neutral-500">
+                Every logged run gets fed through rule-based extraction. Failure rates, ordering
+                dependencies, timing quirks. No model calls, no cloud. SQLite and a rules file
+                that Cursor already reads.
+              </p>
+            </div>
+            <CodeBlock
               title="rostr patterns"
-              lines={[
-                "  Learned Patterns:",
-                "",
-                '  [4x] run_migration fails 43% of the time',
-                '  [3x] create_branch must complete before run_sql',
-                '  [2x] fast failures suggest adding delays between steps',
-                '  [2x] overall success rate: 60%',
-              ]}
               prompt={false}
+              lines={[
+                "run_sql fails after fast runs — space steps",
+                "create_branch → run_sql works in that order",
+                "Neon stack: 43% success over 7 runs",
+              ]}
             />
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="border-t border-white/5 py-24 text-center">
-        <div className="mx-auto max-w-xl px-6">
-          <h2 className="text-3xl font-bold tracking-tight">
-            Stop drowning Cursor in tools.
-          </h2>
-          <p className="mt-4 text-neutral-400">
-            Install Rostr in 30 seconds. No sign-up, no cloud, no API keys.
+      <section className="border-t border-white/[0.06] py-14 md:py-16">
+        <div className="mx-auto max-w-3xl px-6">
+          <CodeBlock lines={["npm install -g rostr-mcp && rostr init"]} />
+          <p className="mt-4 text-sm text-neutral-600">
+            Local only. MIT licensed. No account, no API keys, no telemetry.
           </p>
-          <div className="mt-8 flex justify-center">
-            <Terminal lines={["npm install -g rostr-mcp && rostr init"]} />
-          </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-white/5 py-8">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 text-sm text-neutral-600">
-          <span className="font-mono">rostr</span>
-          <span>MIT License</span>
+      <footer className="border-t border-white/[0.06] py-8">
+        <div className="mx-auto flex max-w-3xl items-center justify-between px-6 font-mono text-[12px] text-neutral-600">
+          <span>rostr · mit</span>
+          <a href={GITHUB} className="transition hover:text-neutral-400">github</a>
         </div>
       </footer>
     </main>
   );
 }
 
-function Terminal({
+function CodeBlock({
   lines,
   title,
   prompt = true,
@@ -205,98 +199,24 @@ function Terminal({
   prompt?: boolean;
 }) {
   return (
-    <div className="w-full max-w-lg overflow-hidden rounded-xl border border-white/10 bg-[#111] font-mono text-sm">
-      {title && (
-        <div className="border-b border-white/5 px-4 py-2 text-xs text-neutral-500">
+    <div className="w-full max-w-md border border-white/[0.08] bg-[#0c0c0c]">
+      {title ? (
+        <div className="border-b border-white/[0.06] px-4 py-2 font-mono text-[11px] uppercase tracking-wider text-neutral-600">
           {title}
         </div>
-      )}
-      <div className="p-4">
+      ) : null}
+      <pre className="overflow-x-auto p-4 font-mono text-[13px] leading-relaxed">
         {lines.map((line, i) => (
-          <div key={i} className="flex">
-            {prompt && (
-              <span className="mr-2 select-none text-emerald-400">$</span>
+          <div key={i} className="flex gap-3">
+            {prompt ? (
+              <span className="select-none text-neutral-600">$</span>
+            ) : (
+              <span className="select-none w-3 shrink-0" />
             )}
-            <span className="text-neutral-200">{line}</span>
+            <span className="text-neutral-300">{line}</span>
           </div>
         ))}
-      </div>
-    </div>
-  );
-}
-
-function ComparisonCard({
-  title,
-  items,
-  bad,
-}: {
-  title: string;
-  items: string[];
-  bad?: boolean;
-}) {
-  return (
-    <div
-      className={`rounded-xl border p-6 ${
-        bad
-          ? "border-red-500/20 bg-red-500/[0.03]"
-          : "border-emerald-500/20 bg-emerald-500/[0.03]"
-      }`}
-    >
-      <h3
-        className={`mb-4 text-lg font-semibold ${
-          bad ? "text-red-400" : "text-emerald-400"
-        }`}
-      >
-        {title}
-      </h3>
-      <ul className="space-y-2">
-        {items.map((item, i) => (
-          <li key={i} className="flex items-start gap-2 text-sm text-neutral-300">
-            <span className={`mt-0.5 ${bad ? "text-red-500" : "text-emerald-500"}`}>
-              {bad ? "✗" : "✓"}
-            </span>
-            {item}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function Step({
-  num,
-  title,
-  desc,
-}: {
-  num: string;
-  title: string;
-  desc: string;
-}) {
-  return (
-    <div className="rounded-xl border border-white/5 bg-white/[0.02] p-6">
-      <span className="font-mono text-3xl font-bold text-neutral-700">
-        {num}
-      </span>
-      <h3 className="mt-3 text-lg font-semibold">{title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-neutral-400">{desc}</p>
-    </div>
-  );
-}
-
-function ToolCard({
-  name,
-  when,
-  what,
-}: {
-  name: string;
-  when: string;
-  what: string;
-}) {
-  return (
-    <div className="rounded-xl border border-white/5 bg-white/[0.02] p-5">
-      <code className="text-sm font-bold text-emerald-400">{name}</code>
-      <p className="mt-1 text-xs text-neutral-500">{when}</p>
-      <p className="mt-2 text-sm text-neutral-300">{what}</p>
+      </pre>
     </div>
   );
 }

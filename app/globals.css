@@ -3,4 +3,10 @@
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-newsreader);
+}
+
+::selection {
+  background-color: rgb(251 146 60 / 0.2);
+  color: #fafafa;
 }
